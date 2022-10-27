@@ -1,0 +1,88 @@
+Project 3 - Analysis of Alternative Restructuring
+
+
+Username: taylorb2
+
+
+I. For each case in which you believe trinode restructuring (or some
+   other, novel idea) can be applied to more efficiently rebalance a
+   CTree, provide
+
+     (a) Description of the conditions; i.e., what must be true about
+     	 the imbalanced node and its subtrees to apply trinode
+     	 restructuring?  Conditions on height and size? Ancestors and
+     	 descendents?
+
+		 Trinode construction can occur on the node "NodePointer"
+		 if the size of the left/right child subtree is 4, while the
+		 the size of the other child is 1. If the height is exactly 3,
+		 trinode restructuring can occur. This can happen during insertion
+		 or removal of a node where it makes the tree have these conditions.
+
+     (b) Describe how trinode restructuring would be applied in this
+         case; e.g. which nodes are x, y, z?
+
+		 In the case listed in step A, we can procced as following:
+		 1.Determine the node that is imbalanced. (if one child of that
+		 node is 4, while the other is 1)
+		 2.Determine which subtree(leftChild or rightChild) has the 
+		 larger size.
+		 3. 
+		 a)If the left subtree has the larger size
+		 z becomes the imbalanced node
+		 y becomes z->m_left
+		 x becomes largest in order successor on z->m_left
+
+		 b)If the right subtree has the larger size:
+		 z becomes the imbalanced node.
+		 y becomes the z->m_right
+		 x becomes largest in order successor on z->m_right
+		 subtree
+
+     (c) Explain why trinode restructuring results in a size-balanced
+         subtree.
+
+		 Trinode reconstructuring results in a size balanced subtree
+		 just like the array method results in a size balanced subtree.
+		 If we look at how the array method works, it essentially works
+		 like a binary search, since all the keys are in order
+		 smallest to largest we find the middle index and that becomes are
+		 new subroot. We then build around that. If you pay carefull 
+		 attention you realize that often times most of the nodes 
+		 point to the same nodes they were before rebalancing just 
+		 some of the nodes around the imbalnced node were shifted.
+		 TriNode reconstruction essentially is shifting one place 
+		 to the left or to the right. This is why is the case listed 
+		 in step A, when we only need to shift the out of balance node 
+		 and surrounding nodes by one we can use trinode reconstruction
+		 instead since it is essentially doing the same thing.
+
+     (d) Did you implement it, and did it work as expected?
+  
+     I implemented it as the function triNode(). Simply pass in the node that
+	 is imbalanced and meets the criteria in part A and it will reblance.
+
+    How to setup x, y, and z:
+
+     ///                    20(z)
+     ///                   /   \
+     ///                 10(y)  30
+     ///                /   \ 
+     ///               5    15(x)      
+	 //               /
+	 //              3  
+
+
+II. Extra Credit: Why are the trees in this project called "Chestnut
+    Trees?"
+
+    The trees in this project are called chestnut trees because
+	we never let the size of one subtree differ by more that
+	two from the size of its sibling. This makes sure that the chestnut
+	tree branches do not differ to much in size and this allows the nodes
+	to be more evenelly distributed resulting in faster find() times as
+	the experimental time should be closer to log(n) this way.
+	In real life, in a orchard, they prune chestnut trees so that 
+	the chestnut trees can grow tall and upward. The idea is that long 
+	branches take away from the main center branch or in \
+	this case represnted by the root.
